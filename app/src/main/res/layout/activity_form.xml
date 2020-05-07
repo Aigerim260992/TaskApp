@@ -22,10 +22,11 @@
         android:hint="Описание задачи"/>
     
     <Button
+        android:id="@+id/ButtonSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Сохранить"
-        android:onClick="onClick"/>
+        android:onClick="onSave"/>
 
 
 </LinearLayout>

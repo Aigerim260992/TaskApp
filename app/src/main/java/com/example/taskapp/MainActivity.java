@@ -8,11 +8,14 @@ import android.view.View;
 import android.view.Menu;
 
 import com.example.taskapp.models.Task;
+import com.example.taskapp.ui.onboard.OnBoardActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -28,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (false) {
+            startActivity(new Intent(this, OnBoardActivity.class));
+            finish();
+            return;
+        }
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -59,6 +68,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_exit) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
@@ -68,15 +86,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK && requestCode == 100 && data != null){
-            Task task = (Task) data.getSerializableExtra("task");
-            Log.e("TAG", "title = " + task.getTitle());
-            Log.e("TAG", "desc = " + task.getDesc());
+        if (resultCode == RESULT_OK && requestCode == 100 && data != null) {
+//            Task task = (Task) data.getSerializableExtra("task");
+       //    Log.e("TAG", "on Activity");
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+            if(fragment != null) {
+                fragment.getChildFragmentManager().getFragments().get(0).onActivityResult(requestCode,resultCode,data);
+            }
         }
     }
 
-    public void onClickExit(MenuItem item) {
-   finish();
-
-    }
 }
