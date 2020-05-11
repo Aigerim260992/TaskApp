@@ -1,6 +1,8 @@
 package com.example.taskapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (false) {
+        if (!isShown()) {
             startActivity(new Intent(this, OnBoardActivity.class));
             finish();
             return;
@@ -60,6 +62,11 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
+    private boolean isShown(){
+        SharedPreferences preferences = getSharedPreferences("settings", Context.MODE_PRIVATE);
+        return preferences.getBoolean("isShown", false);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -70,8 +77,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_exit) {
+            startActivity(new Intent(this,OnBoardActivity.class));
             finish();
-            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -87,13 +94,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == 100 && data != null) {
-//            Task task = (Task) data.getSerializableExtra("task");
-       //    Log.e("TAG", "on Activity");
             Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-            if(fragment != null) {
-                fragment.getChildFragmentManager().getFragments().get(0).onActivityResult(requestCode,resultCode,data);
+            fragment.getChildFragmentManager().getFragments().get(0).onActivityResult(requestCode,resultCode,data);
             }
         }
+
+        public void openProfile(View view){
+            startActivity(new Intent(MainActivity.this, ProfileActivity.class));
     }
 
-}
+    }
+

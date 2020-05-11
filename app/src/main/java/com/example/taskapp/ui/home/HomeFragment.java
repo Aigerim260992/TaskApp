@@ -3,6 +3,7 @@ package com.example.taskapp.ui.home;
 import android.content.Intent;
 import android.content.ReceiverCallNotAllowedException;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,8 +28,6 @@ public class HomeFragment extends Fragment {
 
     private TaskAdapter adapter;
     private ArrayList<Task> list = new ArrayList<>();
-    Task task;
-    int pos;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -48,11 +47,10 @@ public class HomeFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100 && resultCode == RESULT_OK && data != null) {
-            task = (Task) data.getSerializableExtra("task");
-            list.add(pos,task);
-           adapter.update(list);
-           adapter.notifyDataSetChanged();
-        }
+        Task task = (Task) data.getSerializableExtra("task");
+        list.add(task);
+        adapter.notifyDataSetChanged();
+        Log.e("TAG", "title="+ task.getTitle());
+        Log.e("TAG", "desc="+ task.getDesc());
     }
 }

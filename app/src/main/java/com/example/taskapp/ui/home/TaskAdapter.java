@@ -22,6 +22,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>  {
     private OnItemClickListener onItemClickListener;
 
     public TaskAdapter(ArrayList<Task> list) {
+
         this.list = list;
     }
 
@@ -47,11 +48,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>  {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public void update(ArrayList<Task> Task){
-        list = Task;
-        notifyDataSetChanged();
-
-    }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
