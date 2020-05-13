@@ -90,14 +90,14 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == 100 && data != null) {
-            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-            fragment.getChildFragmentManager().getFragments().get(0).onActivityResult(requestCode,resultCode,data);
-            }
-        }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (resultCode == RESULT_OK && requestCode == 100 && data != null) {
+//            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+//            fragment.getChildFragmentManager().getFragments().get(0).onActivityResult(requestCode,resultCode,data);
+//            }
+//        }
 
         public void openProfile(View view){
             startActivity(new Intent(MainActivity.this, ProfileActivity.class));

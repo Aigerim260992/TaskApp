@@ -15,6 +15,9 @@ public class FormActivity extends AppCompatActivity {
     private EditText editTitle;
     private EditText editDesc;
 
+    Task task;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +29,10 @@ public class FormActivity extends AppCompatActivity {
 
         editTitle = findViewById(R.id.editTitle);
         editDesc = findViewById(R.id.editDesc);
+
+        getIncomingIntent();
     }
+
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -34,17 +40,24 @@ public class FormActivity extends AppCompatActivity {
         return true;
     }
 
+    public void getIncomingIntent(){
+        task = (Task) getIntent().getSerializableExtra(("task"));
+        if(task!= null){
+            editTitle.setText(task.getTitle());
+            editDesc.setText(task.getDesc());
+        }
+
+    }
+
     public void onSave(View view) {
-        String title = editTitle.getText().toString().trim();
-        String desc = editDesc.getText().toString().trim();
-        Task task = new Task(title,desc);
-        Intent intent = new Intent();
-        intent.putExtra("task", task);
-        setResult(RESULT_OK, intent);
+        if(task != null){
+            task.setTitle(editTitle.getText().toString());
+            task.setDesc(editDesc.getText().toString());
+            App.getInstance().getDatabase().taskDao().update(task);
+        } else {
+            task = new Task(editTitle.getText().toString(), editDesc.getText().toString());
+            App.getInstance().getDatabase().taskDao().insert(task); // запись в базу данных
+        }
         finish();
-        Log.e("TAG", "Save");
-
-
-
     }
 }

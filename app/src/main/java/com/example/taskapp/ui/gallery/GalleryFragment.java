@@ -46,7 +46,6 @@ public class GalleryFragment extends Fragment {
         recyclerFiles.setLayoutManager(new LinearLayoutManager(getContext()));
         FileAdapter adapter = new FileAdapter(list);
         recyclerFiles.setAdapter(adapter);
-        list.add("AAAA");
      }
 
     private void getPermissions() {

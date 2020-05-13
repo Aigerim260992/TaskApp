@@ -1,5 +1,6 @@
 package com.example.taskapp.ui.home;
 
+import android.graphics.Color;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,11 +19,9 @@ import java.util.ArrayList;
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>  {
 
     private ArrayList<Task> list;
-
     private OnItemClickListener onItemClickListener;
 
     public TaskAdapter(ArrayList<Task> list) {
-
         this.list = list;
     }
 
@@ -37,7 +36,14 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>  {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(list.get(position));
+        if(position %2 ==0) {
+            holder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        } else {
+            holder.itemView.setBackgroundColor(Color.parseColor("#CED4FF"));
+        }
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -65,6 +71,14 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>  {
                    onItemClickListener.onItemClick(getAdapterPosition());
                }
            });
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    onItemClickListener.onItemLongClickListener( getAdapterPosition());
+                    return true;
+                }
+            });
+
         }
 
         public void bind(Task task) {

@@ -72,8 +72,6 @@ public class  BoardFragment extends Fragment {
                         Intent intent = new Intent(getContext(), MainActivity.class);
                         startActivity(intent);
                         getActivity().finish();
-
-
                     }
                 });
                 linearLayout.setBackgroundColor(getResources().getColor(R.color.color_board3));

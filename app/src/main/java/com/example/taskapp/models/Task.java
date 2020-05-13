@@ -1,15 +1,31 @@
 package com.example.taskapp.models;
 
-import java.io.Serializable;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+@Entity
 public class Task implements Serializable {
 
+    @PrimaryKey(autoGenerate = true)
+    private int id;
     private String Title;
     private String Desc;
+
+    public Task() {
+    }
 
     public Task(String title, String desc) {
         Title = title;
         Desc = desc;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
