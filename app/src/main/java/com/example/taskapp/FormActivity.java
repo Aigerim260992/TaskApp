@@ -15,7 +15,7 @@ public class FormActivity extends AppCompatActivity {
     private EditText editTitle;
     private EditText editDesc;
 
-    Task task;
+    private Task task;
 
 
     @Override

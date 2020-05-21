@@ -5,6 +5,7 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,14 +38,11 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>  {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(list.get(position));
         if(position %2 ==0) {
-            holder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            holder.layout.setBackgroundColor(Color.LTGRAY);
         } else {
-            holder.itemView.setBackgroundColor(Color.parseColor("#CED4FF"));
+            holder.layout.setBackgroundColor(Color.WHITE);
         }
     }
-
-
-
     @Override
     public int getItemCount() {
         return list.size();
@@ -60,11 +58,14 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>  {
         private TextView texTitle;
         private TextView textDesc;
 
+        private LinearLayout layout;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             texTitle = itemView.findViewById(R.id.textTitle);
             textDesc = itemView.findViewById(R.id.textDesc);
+            layout = itemView.findViewById(R.id.layout);
            itemView.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {

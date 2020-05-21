@@ -10,6 +10,7 @@
 
     <EditText
         android:id="@+id/editTitle"
+        style="@style/EditTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Задача"/>
@@ -17,6 +18,7 @@
     
     <EditText
         android:id="@+id/editDesc"
+        style="@style/EditTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Описание задачи"/>
@@ -25,8 +27,11 @@
         android:id="@+id/ButtonSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Сохранить"
+        android:background="@drawable/button_rounded_gradient"
+        android:textColor="@android:color/white"
+        android:text="Save"
         android:onClick="onSave"/>
+
 
 
 </LinearLayout>

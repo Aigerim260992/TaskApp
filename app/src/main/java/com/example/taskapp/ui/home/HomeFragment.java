@@ -7,6 +7,9 @@ import android.content.ReceiverCallNotAllowedException;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -36,6 +39,7 @@ public class HomeFragment extends Fragment {
     private TaskAdapter adapter;
     private ArrayList<Task> list = new ArrayList<>();
     private AlertDialog.Builder ad;
+    private boolean sorted = false;
 
 
 
@@ -101,7 +105,43 @@ public class HomeFragment extends Fragment {
         });
     }
 
-//    @Override
+    private void loadDataSorted() {
+        App.getInstance()
+                .getDatabase()
+                .taskDao()
+                .getAllSortedLive()
+                .observe(getViewLifecycleOwner(), new Observer<List<Task>>() {
+                    @Override
+                    public void onChanged(List<Task> tasks) {
+                        list.clear();
+                        list.addAll(tasks);
+                         adapter.notifyDataSetChanged();// чтение2, слушает изменения в базе данных
+                    }
+                });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.action_sort){
+            if(sorted){
+                loadData();
+                sorted = false;
+            } else{
+                loadDataSorted();
+                sorted = true;
+            }
+        }
+
+        return true;
+    }
+
+    //    @Override
 //    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);
 //        Task task = (Task) data.getSerializableExtra("task");
@@ -110,5 +150,6 @@ public class HomeFragment extends Fragment {
 //        Log.e("TAG", "title="+ task.getTitle());
 //        Log.e("TAG", "desc="+ task.getDesc());
 //    }
+
 
 }

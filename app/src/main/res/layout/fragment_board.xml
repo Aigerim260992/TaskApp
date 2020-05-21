@@ -3,18 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:padding="42dp"
     android:id="@+id/Linear"
-    tools:context=".ui.onboard.BoardFragment">
+    tools:context=".ui.onboard.BoardFragment"
+    >
+    
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnimationView"
+        android:layout_width="320dp"
+        android:layout_height="320dp"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true"/>
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="100dp"
-        android:src="@mipmap/ic_launcher"/>
+
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView"-->
+<!--        android:layout_width="200dp"-->
+<!--        android:layout_height="200dp"-->
+<!--        android:layout_marginTop="100dp"-->
+<!--        android:src="@mipmap/ic_launcher"/>-->
 
     <TextView
         android:id="@+id/textTitle"
@@ -29,9 +39,7 @@
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:layout_margin="62dp"
-       android:text="Запустить"/>
-
-
+       android:text="Launch the App"/>
 
 
 </LinearLayout>

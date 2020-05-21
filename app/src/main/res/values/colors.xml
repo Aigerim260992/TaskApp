@@ -6,4 +6,5 @@
     <color name="color_board1">#FFEB3B</color>
     <color name="color_board2">#FF5722</color>
     <color name="color_board3">#9C27B0</color>
+    <color name="gray_light">#C6C6C6</color>
 </resources>
